@@ -10,5 +10,7 @@
 
         public decimal PRICE { get; set; }
         public bool RETURNABLE { get; set; }
+
+        public Product PRODUCT { get; set; }
     }
 }
