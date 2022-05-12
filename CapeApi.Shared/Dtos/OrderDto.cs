@@ -11,9 +11,9 @@ namespace CapeApi.Shared
         public OrderDto(Order order, string deliveryAddress)
         {
             OrderNumber = order.ORDERID;
-            OrderDate = order.ORDERDATE.Value.ToString("dd'-'MMM'-'yyyy");
+            OrderDate = order.ORDERDATE.ToFormattedDateString();
             DeliveryAddress = deliveryAddress;
-            DeliveryExpected = order.DELIVERYEXPECTED.Value.ToString("dd'-'MMM'-'yyyy");
+            DeliveryExpected = order.DELIVERYEXPECTED.ToFormattedDateString();
         }
         public int OrderNumber { get; set; }
 
