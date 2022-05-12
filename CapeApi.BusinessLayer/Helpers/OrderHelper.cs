@@ -19,8 +19,6 @@ namespace CapeApi.BusinessLayer.Helpers
         public IOrderRepository OrderRepository { get; }
         public IOrderItemRepository OrderItemRepository { get; }
 
-        private string DateFormatString = "dd'-'MMM'-'yyyy";
-
         public async Task<LatestOrderReturnModel> GetLatestOrder(string email, string customerId)
         {
             try
@@ -31,7 +29,7 @@ namespace CapeApi.BusinessLayer.Helpers
                 if (customer == null)
                     return null;
 
-                var customerDto = new CustomerDto() { Name = customer.FIRSTNAME, LastName = customer.LASTNAME };
+                var customerDto = new CustomerDto(customer);
 
                 // 2. Find latest order
                 var order = await OrderRepository.GetLatestAsync(customerId);
@@ -39,12 +37,13 @@ namespace CapeApi.BusinessLayer.Helpers
                 if (order == null)
                     return new LatestOrderReturnModel() { Customer = customerDto };
 
-                var orderDto = new OrderDto() { OrderNumber = order.ORDERID, OrderDate = order.ORDERDATE.Value.ToString(DateFormatString), DeliveryAddress = customer.ADDRESS, DeliveryExpected = order.DELIVERYEXPECTED.Value.ToString(DateFormatString)};
+                var orderDto = new OrderDto(order, customer.ADDRESS);
 
                 // 3. Find latest orders items including associated products
                 var orderItems = await OrderItemRepository.ListAsync(order.ORDERID);
 
-                orderDto.OrderItems = orderItems.Select(orderItem => new OrderItemDto(orderItem, order.CONTAINSGIFT));
+                if (orderItems.Any())
+                    orderDto.OrderItems = orderItems.Select(orderItem => new OrderItemDto(orderItem, order.CONTAINSGIFT));
 
                 return new LatestOrderReturnModel() { Customer = customerDto, Order = orderDto };
             }
