@@ -18,3 +18,4 @@ database, the user's email and ID would be passed through as route parameters in
 5. I would configure xml comments for swagger in order to better document the API for devs needing to utilise it.
 6. Possibly implement AutoMapper for mapping Models to DTO automatically.
 7. Personal preference but I don't tend to use shared projects to store models, I usually create a common package that I publish to as an artifcat to azure to be utilized as a nuget package, (a bit beyond the scope of this particular excercise!)
+8. This API could do with some level of protection so not just anyone can access, at the very least an APIKey
