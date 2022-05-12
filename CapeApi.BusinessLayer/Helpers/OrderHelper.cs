@@ -45,7 +45,7 @@ namespace CapeApi.BusinessLayer.Helpers
                 if (orderItems.Any())
                     orderDto.OrderItems = orderItems.Select(orderItem => new OrderItemDto(orderItem, order.CONTAINSGIFT));
 
-                return new LatestOrderReturnModel() { Customer = customerDto, Order = orderDto };
+                return new LatestOrderReturnModel(customerDto, orderDto);
             }
             catch (Exception ex)
             {
