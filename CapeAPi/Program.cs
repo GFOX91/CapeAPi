@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 //Repositories
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
 //Helpers
 builder.Services.AddScoped<IOrderHelper, OrderHelper>();

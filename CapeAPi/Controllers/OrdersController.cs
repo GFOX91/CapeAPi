@@ -23,6 +23,9 @@ namespace CapeAPi.Controllers
 
             var latestOrder = await OrderHelper.GetLatestOrder(model.User, model.CustomerId);
 
+            if (latestOrder == null)
+                return NotFound($"Unable to find customer with match email:{model.User} & Id:{model.CustomerId}");
+
             return Ok(latestOrder);
         }
 
