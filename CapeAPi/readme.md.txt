@@ -17,5 +17,5 @@ database, the user's email and ID would be passed through as route parameters in
 4. I would set up two seperate unit testing projects for the client layer and business layer utilising a combination of xunit and Mock to perform units tests on the controller and helper classes.
 5. I would configure xml comments for swagger in order to better document the API for devs needing to utilise it.
 6. Possibly implement AutoMapper for mapping Models to DTO automatically.
-7. Personal preference but I don't tend to use shared projects to store models, I usually create a common package that I publish to as an artifcat to azure to be utilized as a nuget package, (a bit beyond the scope of this particular excercise!)
+7. Personal preference but I don't tend to use shared projects to store models, I usually create a common package that I publish to as an artifcat to azure to be utilized as a nuget package, (a bit beyond the scope of this particular excercise! but useful as the nuget package can be used by both your api project and client consuming said API)
 8. This API could do with some level of protection so not just anyone can access, at the very least an APIKey
